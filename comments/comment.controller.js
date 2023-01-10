@@ -1,1 +1,16 @@
-const service = require('./comment.service')
+class CommentController {
+    constructor({ commentService }){
+        this.commentService = commentService
+    }
+
+    async getList(req, res, next) {
+        try {
+            const comment = await this.commentService.list()
+            res.json(comment)
+        } catch (error) {
+            next(error)
+        }
+    }
+}
+
+module.exports = CommentController
